@@ -1,0 +1,47 @@
+function setup() {
+	createCanvas(windowWidth, windowHeight);
+	background(100);
+  cx = 350
+	cy = 350
+	r = 240
+	r1 = r * .7
+	r2 = r1 * .2
+	MAX = 7
+	clr = 0
+	swapFill()
+}
+
+function draw() {
+
+	ellipse(cx, cy, 2 * r);
+	noFill()
+	f = frameCount % 60
+	a = f * 2 * PI / 60
+
+// outer
+	for (i=MAX; i>=0; i--) {
+		rn = r1 + (r - r1) * i / MAX
+	  cx1 = cx + cos(a) * (rn - r)
+	  cy1 = cy  + sin(a) * (rn - r)
+	  ellipse(cx1, cy1, 2 * rn);
+		swapFill()
+	}
+// inner
+	for (i=MAX; i>=0; i--) {
+		rn = r2 + (r1 - r2) * i / MAX
+	  cx2 = cx1 + cos(a) * (r1 - rn)
+	  cy2 = cy1 + sin(a) * (r1 - rn)
+	  ellipse(cx2, cy2, 2 * rn);
+		swapFill()
+	}
+
+	
+}
+function swapFill() {
+	if (clr == 0) {
+		fill('white')
+	} else {
+	  fill('black')
+	}
+	clr = 1 - clr
+}
